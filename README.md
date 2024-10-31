@@ -17,8 +17,9 @@ Al iniciar sesión con su nombre de usuario o email, y su contraseña, cada juga
 
 Al iniciar el juego, el jugador verá un menú con las opciones de dos tipos de habitaciones o escenarios para elegir:
 
-Laboratorio de Computación
-Dirección
+1. Laboratorio de Computación.
+2. Salón de clases.
+   
 Cada habitación presenta 8 acertijos que deben resolverse para avanzar. Los desafíos están diseñados en torno a temas de sistemas y tecnología, aumentando en dificultad conforme se avanza en cada habitación.
 
 ## Funcionalidades Clave:
