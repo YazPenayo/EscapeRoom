@@ -61,10 +61,10 @@ if ($resultado && $resultado->num_rows > 0) {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item">
-                <a class="nav-link" href="#">Iniciar Sesión</a>
+                <a class="nav-link" href="views/login.php">Iniciar Sesión</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Registrate</a>
+                <a class="nav-link" href="views/register.php">Registrate</a>
               </li>
             </ul>
           </div>
@@ -107,15 +107,14 @@ if ($resultado && $resultado->num_rows > 0) {
               <div class="box">
                 <div class="img-box">
                   <?php 
-                  // Seleccionar el icono basado en el tipo de habitación o nombre
                   if ($habitacion['name'] == 'Laboratorio de Computación') {
                     echo '<i class="fa fa-desktop fa-5x" aria-hidden="true"></i>';
                   } elseif ($habitacion['name'] == 'Salón de Clases') {
-                    echo '<i class="fa fa-university fa-5x" aria-hidden="true"></i>'; // Cambié a university para el salón de clases
+                    echo '<i class="fa fa-university fa-5x" aria-hidden="true"></i>';
                   } elseif ($habitacion['name'] == 'Dirección') {
-                    echo '<i class="fa fa-key fa-5x" aria-hidden="true"></i>'; // Cambié a key para la dirección
+                    echo '<i class="fa fa-key fa-5x" aria-hidden="true"></i>';
                   }else {
-                    echo '<i class="fa fa-bed fa-5x" aria-hidden="true"></i>'; // Icono por defecto
+                    echo '<i class="fa fa-bed fa-5x" aria-hidden="true"></i>';
                   }
                 ?>
                 </div>
