@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("El correo no se pudo enviar. Error: {$mail->ErrorInfo}"); 
         }
 
-        header("Location: ../views/login.php");
+        header("Location: ../index.php");
         exit(); 
     } else {
         die("Error al registrar el jugador: " . htmlspecialchars($stmt->error));
