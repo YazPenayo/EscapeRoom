@@ -50,7 +50,7 @@ body {
 }
 
 .heading_container h2 span {
-  color: #ffda08; /*color de las span*/
+  color: #ffe100; /*color de las span*/
 }
 
 .heading_container p {
@@ -127,7 +127,7 @@ a:focus {
 
 .sub_page .hero_area {
   min-height: auto;
-  background: linear-gradient(130deg, #d1bc00, #c5a100);
+  background: linear-gradient(130deg, #000000, #000000);
 }
 
 .sub_page .hero_area .hero_bg_box {
@@ -168,7 +168,7 @@ a:focus {
 }
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  color: #f0c400;
+  color: #ffe100; /*color de las palabras del menu*/
 }
 
 .custom_nav-container .navbar-nav .nav-item.active .nav-link {
@@ -273,7 +273,7 @@ a:focus {
 }
 
 .slider_section .detail-box {
-  color: #ffd000;
+  color: #0084ff;
 }
 
 .slider_section .detail-box h1 {
@@ -927,4 +927,5 @@ a:focus {
 .footer_section p a {
   color: inherit;
 }
+
 /*# sourceMappingURL=style.css.map */

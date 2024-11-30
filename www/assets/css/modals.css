@@ -1,0 +1,65 @@
+.modal-content {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    border: 2px solid white;
+  }
+
+  .modal-header {
+    border-bottom: none;
+    text-align: center;
+  }
+
+  .modal-title {
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .modal-body h3 {
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .close {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    opacity: 1;
+    transition: none;
+    border: none;
+    background: transparent;
+  }
+
+  .close:hover, .close:focus {
+    color: white;
+    opacity: 1;
+    background-color: transparent;
+    box-shadow: none; 
+    outline: none;
+  }
+
+
+  .btn-warning {
+    background-color: #f39c12;
+    border: none;
+  }
+
+  .btn-danger {
+    background-color: #db4437;
+  }
+
+  .btn-primary {
+    background-color: #4267b2;
+  }
+
+  a {
+    color: #f39c12;
+    text-decoration: none;
+  }
+
+  .text-center {
+    text-align: center;
+  }
