@@ -66,11 +66,45 @@ if (isset($_SESSION['selected_room'])) {
       $stmt->close();
   }
 }
+include_once "../assets/includes/header.php";
 ?>
 <body class="sub_page">
-    <div class="hero_area">
-    <?php  include_once "../assets/includes/header.php"; ?>
-    </div>
+
+<div class="hero_area">
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="../index.php">
+            <span>
+              EscapeRoom
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+              <?php if (isset($_SESSION['id_player'])): ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="./settings.php">Ajustes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./logout.php"> Cerrar Sesión</a>
+                </li>
+              <?php else: ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">Registrarse</a>
+                </li>
+              <?php endif; ?>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
 
     <section class="service_section layout_padding">
         <div class="service_container">

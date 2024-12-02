@@ -93,6 +93,45 @@ define('SQL_GET_CORRECT_ANSWER', '
     FROM 
         questions_options 
     WHERE 
-        id_question = ? 
-        AND is_correct = 1
+        id_question = ? AND is_correct = 1
+');
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////SETTINGS///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+define('SQL_GET_PLAYER_DATA', '
+    SELECT 
+        *
+    FROM 
+        players
+    WHERE 
+        id_player = ?
+');
+
+define('SQL_UPDATE_PLAYER', '
+    UPDATE players
+    SET 
+        name_player = ?, 
+        lastname_player = ?, 
+        username = ?, 
+        email = ?
+    WHERE 
+        id_player = ?
+');
+
+define('SQL_SELECT_PASSWORD', '
+    SELECT 
+        password
+    FROM    
+        players
+    WHERE 
+        id_player = ?
+');
+
+define('SQL_UPDATE_PASSWORD', '
+    UPDATE 
+        players
+    SET 
+        password = ?
+    WHERE 
+        id_player = ? AND password = ?
 ');

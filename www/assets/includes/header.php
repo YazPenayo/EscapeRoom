@@ -14,6 +14,7 @@
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/responsive.css" rel="stylesheet" />
+
     <style>
         /* Estilo para la sección de trivia */
         .trivia-section {
@@ -146,29 +147,6 @@
             text-transform: uppercase;
         }
 
-        .footer_section {
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer_section p {
-            margin: 0;
-        }
-
-        .footer_section a {
-            color: #f39c12;
-            text-decoration: none;
-        }
-
-        .footer_section a:hover {
-            text-decoration: underline;
-        }
-
         /* Media Queries para pantallas pequeñas */
         @media (max-width: 768px) {
             .trivia-section {
@@ -198,43 +176,10 @@
 
             .btn-help {
                 margin-top: 40px;
-                font-size: 20px; /* Reducimos el tamaño del cronómetro */
+                font-size: 10px; /* Reducimos el tamaño del cronómetro */
                 top: 100px; /* Movemos un poco más arriba en pantallas más pequeñas */
             }
         }
     </style>
 </head>
-<header class="header_section">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="../index.php">
-                <span>EscapeRoom</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <?php if (isset($_SESSION['id_player'])): ?>
-                        <li class="nav-item">
-                            <span class="nav-link">Hola, <?php echo htmlspecialchars($_SESSION['name_player']); ?>!</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Historial</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./logout.php">Cerrar Sesión</a>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">Registrarse</a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</header>
+
