@@ -74,29 +74,6 @@ if ($resultado && $resultado->num_rows > 0) {
       background-color: #f39c12;
       border: none;
     }
-    .footer_section {
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      left: 0;
-    }
-
-    .footer_section p {
-      margin: 0;
-    }
-
-    .footer_section a {
-      color: #f39c12;
-      text-decoration: none;
-    }
-
-    .footer_section a:hover {
-      text-decoration: underline;
-    }
-
   </style>
 </head>
 <body class="sub_page">
@@ -116,10 +93,7 @@ if ($resultado && $resultado->num_rows > 0) {
           <ul class="navbar-nav">
               <?php if (isset($_SESSION['id_player'])): ?>
                 <li class="nav-item">
-                  <span class="nav-link">Hola, <?php echo htmlspecialchars($_SESSION['name_player']); ?>!</span>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Historial</a>
+                  <a class="nav-link" href="./settings.php">Ajustes</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="./logout.php"> Cerrar Sesión</a>
@@ -172,12 +146,12 @@ if ($resultado && $resultado->num_rows > 0) {
                     $_SESSION['selected_room'] = $habitacion['id_room'];
                 ?>
                    <a href="#" data-toggle="modal" data-target="#loginModal" class="d-block" style="background-color: #ffe100; color: white; border-radius: 30px; padding: 10px 30px; font-size: 16px; font-weight: bold; text-transform: uppercase; border: none; display: inline-block; text-align: center; transition: all 0.3s ease;">
-    INICIAR SESIÓN
-  </a>
-<?php else: ?>
-  <a href="./trivia.php?id_room=<?php echo $habitacion['id_room']; ?>" class="d-block" style="background-color: #ffe100; color: white; border-radius: 30px; padding: 10px 30px; font-size: 16px; font-weight: bold; text-transform: uppercase; border: none; display: inline-block; text-align: center; transition: all 0.3s ease;">
-    PLAY
-  </a>
+                      INICIAR SESIÓN
+                    </a>
+                    <?php else: ?>
+                      <a href="./trivia.php?id_room=<?php echo $habitacion['id_room']; ?>" class="d-block" style="background-color: #ffe100; color: white; border-radius: 30px; padding: 10px 30px; font-size: 16px; font-weight: bold; text-transform: uppercase; border: none; display: inline-block; text-align: center; transition: all 0.3s ease;">
+                        PLAY
+                      </a>
                 <?php endif; ?>
                 </div>
               </div>
@@ -186,12 +160,6 @@ if ($resultado && $resultado->num_rows > 0) {
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="footer_section">
-    <div class="container">
-      <p>&copy; <span id="displayYear"></span> EscapeRoom, todos los derechos reservados.</p>
     </div>
   </section>
   <?php

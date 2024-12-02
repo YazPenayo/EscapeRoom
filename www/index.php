@@ -130,11 +130,6 @@ include('./querys/querys.php');
       </div>
     </section>
   </div>
-  <section class="footer_section">
-    <div class="container">
-      <p>&copy; <span id="displayYear"></span> EscapeRoom, todos los derechos reservados.</p>
-    </div>
-  </section>
 
     </div>
   </div>
