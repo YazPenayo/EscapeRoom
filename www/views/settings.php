@@ -45,9 +45,6 @@ include_once "../assets/includes/header.php";
           <ul class="navbar-nav">
               <?php if (isset($_SESSION['id_player'])): ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="./settings.php">Ajustes</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="./logout.php"> Cerrar Sesión</a>
                 </li>
               <?php else: ?>

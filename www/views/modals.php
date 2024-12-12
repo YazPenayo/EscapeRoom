@@ -1,6 +1,5 @@
+<!-- MODAL DE LOGIN -->
 
-
-<!-- Modal de Inicio de Sesión -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -40,8 +39,9 @@
         <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
     </div>
   <?php endif; ?>
-<!-- Modal de Registro -->
-<!-- Modal de Registro -->
+
+<!-- MODAL DE REGISTRO -->
+
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -101,10 +101,81 @@
   </div>
 </div>
 
+<!-- MODAL DE CONFIRMACIÓN -->
+<div class="modal fade" id="confirmHintModal" tabindex="-1" aria-labelledby="confirmHintModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black; color: white; border-radius: 10px; padding: 20px; border: 2px solid white;">
+      <div class="modal-header" style="border-bottom: none; text-align: center; background-color: black; color: white;">
+        <h5 class="modal-title" id="confirmHintModalLabel" style="color: white;"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; font-size: 30px; font-weight: bold; opacity: 1; transition: none; border: none; background: transparent;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="background-color: black; color: white; padding-top: 0;">
+        <h3 style="font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 20px;">AYUDA</h3>
+        <p id="hint-text" style="text-align: center; margin-bottom: 20px;">Estás a punto de usar la pista. <br>Solo puedes hacerlo una vez por habitación.<br>¿Estás seguro?</p>
+      </div>
+      <div class="modal-footer" style="border-top: none; text-align: center;">
+        <button type="button" class="btn btn-warning" id="confirm-yes" style="background-color: #f39c12; border: none; padding: 8px 16px; border-radius: 5px; color: white; font-weight: bold; font-size: 14px;">USAR</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" style="background-color: white; border: 2px solid #f39c12; padding: 8px 16px; color: #f39c12; font-weight: bold; font-size: 14px;">CERRAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE PISTA -->
+<div class="modal fade" id="hintModal" tabindex="-1" aria-labelledby="hintModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black; color: white; border-radius: 10px; padding: 20px; border: 2px solid white;">
+      <div class="modal-header" style="background-color: black; color: white; border-bottom: none;">
+        <h5 class="modal-title" id="hintModalLabel" style="color: white; display: none;"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; font-size: 30px; font-weight: bold; opacity: 1; transition: none; border: none; background: transparent;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="background-color: black; color: white; padding-top: 0;">
+        <!-- Cambiar el h3 a un formato más destacado, negrita y mayúsculas -->
+        <h3 id="hint-title" style="font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 20px;"></h3>
+        <!-- Texto de la pista con borde blanco -->
+        <div id="hint-container" style="border: 1px solid white; padding: 10px; border-radius: 5px; background: transparent;">
+          <p id="hint" style="text-align: center; margin-bottom: 20px;"></p>
+        </div>
+        <!-- Mensaje de error estilizado -->
+        <p id="error-message" style="text-align: center; display: none; padding: 10px; border: 1px solid white; color: white; background: transparent; border-radius: 5px;"></p>
+      </div>
+      <div class="modal-footer" style="border-top: none;">
+        <button type="button" class="btn btn-warning btn-block" style="background-color: #f39c12; border: none;" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- MODAL TIMER -->
+
+<div class="modal fade" id="timeUpModal" tabindex="-1" role="dialog" aria-labelledby="timeUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: black; color: white; border-radius: 10px; padding: 20px; border: 2px solid white;">
+            <div class="modal-header" style="border-bottom: none; display: flex; justify-content: center; align-items: center;">
+                <h5 class="modal-title" id="timeUpModalLabel" style="font-size: 24px; color: #fff; font-weight: bold;">TIEMPO AGOTADO</h5>
+            </div>
+            <div class="modal-body" style="font-weight: bold; text-align: center; text-transform: none; margin-bottom: 20px;">
+                El tiempo se ha agotado. ¿Qué deseas hacer?
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <button type="button" class="btn btn-primary" id="continueButton" 
+                style="background-color: #f39c12; border: none; padding: 8px 16px; border-radius: 5px; color: white; font-weight: bold; font-size: 14px;">SEGUIR JUGANDO</button>
+                <button type="button" class="btn btn-danger" id="quitButton" 
+                style="background-color: white; border: 2px solid #f39c12; padding: 8px 16px; color: #f39c12; font-weight: bold; font-size: 14px;">ABANDONAR</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Función para mostrar/ocultar la contraseña en el formulario de registro
   const togglePasswordRegister = document.getElementById('toggle-password-register');
   if (togglePasswordRegister) {
     togglePasswordRegister.addEventListener('click', function() {
@@ -121,8 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-
-  // Función para mostrar/ocultar la confirmación de la contraseña en el formulario de registro
   const toggleConfirmPasswordRegister = document.getElementById('toggle-confirm-password-register');
   if (toggleConfirmPasswordRegister) {
     toggleConfirmPasswordRegister.addEventListener('click', function() {
@@ -139,8 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-
-  // Función para mostrar/ocultar la contraseña en el inicio de sesión (opcional)
   const togglePasswordLogin = document.getElementById('toggle-password');
   if (togglePasswordLogin) {
     togglePasswordLogin.addEventListener('click', function() {

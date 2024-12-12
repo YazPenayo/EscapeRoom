@@ -74,6 +74,31 @@ if ($resultado && $resultado->num_rows > 0) {
       background-color: #f39c12;
       border: none;
     }
+
+    .coming-soon-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 50%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+
+    .room-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .disabled-room {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="sub_page">
@@ -117,47 +142,47 @@ if ($resultado && $resultado->num_rows > 0) {
     <div class="service_container">
       <div class="container ">
         <div class="heading_container heading_center">
-        <h2>NUESTRAS <span>HABITACIONES</span></h2>
-        <p>Descubre un mundo de desafíos en cada una de nuestras habitaciones temáticas, diseñadas para poner a prueba tu ingenio y habilidades.<br> ¡Elige la experiencia perfecta y sumérgete en una aventura inolvidable!</p>
+          <h2>NUESTRAS <span>HABITACIONES</span></h2>
+          <p>Descubre un mundo de desafíos en cada una de nuestras habitaciones temáticas, diseñadas para poner a prueba tu ingenio y habilidades.<br> ¡Elige la experiencia perfecta y sumérgete en una aventura inolvidable!</p>
         </div>
         <div class="row">
           <?php foreach ($habitaciones as $habitacion): ?>
-          <div class="col-md-4 ">
-            <div class="box ">
-              <div class="img-box">
-              <?php 
-                  if ($habitacion['room_name'] == 'Laboratorio de Computación') {
-                    echo '<i class="fa fa-desktop fa-5x" aria-hidden="true"></i>';
-                  } elseif ($habitacion['room_name'] == 'Salón de Clases') {
-                    echo '<i class="fa fa-university fa-5x" aria-hidden="true"></i>';
-                  } elseif ($habitacion['room_name'] == 'Dirección') {
-                    echo '<i class="fa fa-key fa-5x" aria-hidden="true"></i>';
-                  } else {
-                    echo '<i class="fa fa-bed fa-5x" aria-hidden="true"></i>';
-                  }
-                ?>
-              </div>
-              <div class="detail-box">
-                <h5><?php echo htmlspecialchars($habitacion['room_name']); ?></h5>
-                <p><?php echo htmlspecialchars($habitacion['description']); ?></p>
-              
-              <?php 
-                  if (!isset($_SESSION['id_player'])): 
-                    $_SESSION['selected_room'] = $habitacion['id_room'];
-                ?>
-                   <a href="#" data-toggle="modal" data-target="#loginModal" class="d-block" style="background-color: #ffe100; color: white; border-radius: 30px; padding: 10px 30px; font-size: 16px; font-weight: bold; text-transform: uppercase; border: none; display: inline-block; text-align: center; transition: all 0.3s ease;">
-                      INICIAR SESIÓN
-                    </a>
+            <div class="col-md-4 ">
+              <div class="box <?php echo ($habitacion['room_name'] == 'Dirección') ? 'disabled-room' : ''; ?>">
+                <div class="img-box">
+                  <?php 
+                      if ($habitacion['room_name'] == 'Laboratorio de Computación') {
+                        echo '<i class="fa fa-desktop fa-5x" aria-hidden="true"></i>';
+                      } elseif ($habitacion['room_name'] == 'Salón de Clases') {
+                        echo '<i class="fa fa-university fa-5x" aria-hidden="true"></i>';
+                      } elseif ($habitacion['room_name'] == 'Dirección') {
+                        echo '<i class="fa fa-key fa-5x" aria-hidden="true"></i>';
+                      } else {
+                        echo '<i class="fa fa-bed fa-5x" aria-hidden="true"></i>';
+                      }
+                  ?>
+                </div>
+                <div class="detail-box">
+                  <h5><?php echo htmlspecialchars($habitacion['room_name']); ?></h5>
+                  <p><?php echo htmlspecialchars($habitacion['description']); ?></p>
+
+                  <?php if ($habitacion['room_name'] == 'Dirección'): ?>
+                    <p class="text-center">Esta habitación estará disponible próximamente. <br>¡Mantente atento!</p>
+                  <?php else: ?>
+                    <?php if (!isset($_SESSION['id_player'])): ?>
+                      <a href="#" data-toggle="modal" data-target="#loginModal" class="d-block" style="background-color: #ffe100; color: white; border-radius: 30px; padding: 10px 30px; font-size: 16px; font-weight: bold; text-transform: uppercase; border: none; display: inline-block; text-align: center; transition: all 0.3s ease;">
+                        INICIAR SESIÓN
+                      </a>
                     <?php else: ?>
                       <a href="./trivia.php?id_room=<?php echo $habitacion['id_room']; ?>" class="d-block" style="background-color: #ffe100; color: white; border-radius: 30px; padding: 10px 30px; font-size: 16px; font-weight: bold; text-transform: uppercase; border: none; display: inline-block; text-align: center; transition: all 0.3s ease;">
                         PLAY
                       </a>
-                <?php endif; ?>
+                    <?php endif; ?>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
-            <?php endforeach; ?>
-          </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
