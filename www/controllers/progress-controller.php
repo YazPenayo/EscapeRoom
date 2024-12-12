@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Registrar la pregunta como completada
     $stmt_update = $conn->prepare(SQL_INSERT_PROGRESS);
     $stmt_update->bind_param(
         'iiiiss', 
