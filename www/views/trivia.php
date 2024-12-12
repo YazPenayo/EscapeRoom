@@ -8,6 +8,7 @@ if (!isset($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
 }
 $token = $_SESSION['token'];
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 include('../models/dbConnection.php');
 include('../querys/querys.php');
 if (isset($_GET['id_room'])) {
@@ -87,19 +88,21 @@ include_once "../assets/includes/header.php";
             <div class="container">
                 <div class="trivia-section">
                     <div class="trivia-header">
-                        <div id="timer" class="timer">00:00</div>
-                        <button id="help-button" class="btn-exit" data-toggle="modal" data-target="#confirmHintModal">
-                            <img src="../assets/img/boton-rojo.png" alt="" style="width:55px; height:55px">
-                        </button>
+                        <?php if ($total_answer != 8): ?>
+                            <div id="timer" class="timer">00:00</div>
+                            <button id="help-button" class="btn-exit" data-toggle="modal" data-target="#confirmHintModal">
+                                <img src="../assets/img/boton-rojo.png" alt="" style="width:55px; height:55px">
+                            </button>
+                        <?php endif; ?>
                     </div>
                     <div class="heading_container heading_center">
                         <h2>ESCAPE<span>ROOM</span></h2>
                     </div>
                     <div class="trivia-content">
-                        <div class="trivia-question" id="question-text"><?php echo htmlspecialchars($pregunta_texto); ?></div>
-                        <form method="POST" id="trivia-form">
-                            <div class="trivia-options" id="options-container">
-                                <?php if ($total_answer != 8): ?>
+                        <?php if ($total_answer != 8): ?>
+                            <div class="trivia-question" id="question-text"><?php echo htmlspecialchars($pregunta_texto); ?></div>
+                            <form method="POST" id="trivia-form">
+                                <div class="trivia-options" id="options-container">
                                     <?php if (!empty($options)): ?>
                                         <?php foreach ($options as $option): ?>
                                             <div class="option-container">
@@ -112,17 +115,43 @@ include_once "../assets/includes/header.php";
                                     <?php endif; ?>
                                 </div>
                                 <button type="submit" class="btn-submit">ENVIAR</button>
-                                <?php else: ?>
-                                    <div class="modal-body" style="color: white; padding: 20px; border-radius: 10px; text-align: center; border: 2px solid white;">
-                                        <h3 style="font-weight: bold; text-transform: uppercase; margin-bottom: 20px;">Habitación Completa</h3>
-                                        <p style="margin-bottom: 20px; font-size: 16px;">¡Has respondido todas las preguntas correctamente!</p>
-                                        <p style="font-size: 18px; font-weight: bold; margin-top: 10px;">8/8 Respuestas Conseguidas</p>
-                                    </div>
-                                <?php endif; ?>
                             </form>
-                            <br>          
-                            <div id="response-message"></div>
-                        </div>
+                        <?php else: ?>
+                            <?php
+                                $idPlayer = $_SESSION['id_player'];
+                                $idRoom = $_SESSION['selected_room'];
+                                $completed = 1;
+                                $lastActivityDate = date('Y-m-d H:i:s');
+
+                                $stmt_check = $conn->prepare(SQL_SELECT_COUNT_COMPLETD_ROOM);
+                                $stmt_check->bind_param('ii', $idPlayer, $idRoom);
+                                $stmt_check->execute();
+                                $result_check = $stmt_check->get_result();
+                                $row_check = $result_check->fetch_assoc();
+
+                                if ($row_check['count'] == 0) { // Si no existe un registro previo
+                                    $stmt = $conn->prepare(SQL_INSERT_COMPLETED_ROOM);
+                                    if ($stmt) {
+                                        $stmt->bind_param('iiis', $idPlayer, $idRoom, $completed, $lastActivityDate);
+                                        $stmt->execute();
+                                        $stmt->close();
+                                    }
+                                }
+                                $stmt_check->close();
+                            ?>
+                            <div class="modal-body" style="text-align: center;">
+                                <h3>¡Habitación Completa!</h3>
+                                <p>¡Has respondido todas las preguntas correctamente!</p>
+                                <p><strong>8/8 Respuestas Conseguidas</strong></p>
+                            </div>
+                            <script>
+                                setTimeout(() => {
+                                    window.location.href = "./rooms.php";
+                                }, 10000);
+                            </script>
+                        <?php endif; ?>
+                        <br>          
+                        <div id="response-message"></div>
                     </div>
                 </div>
             </div>
