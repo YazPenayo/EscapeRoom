@@ -129,19 +129,18 @@
     <div class="modal-content" style="background-color: black; color: white; border-radius: 10px; padding: 20px; border: 2px solid white;">
       <div class="modal-header" style="background-color: black; color: white; border-bottom: none;">
         <h5 class="modal-title" id="hintModalLabel" style="color: white; display: none;"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; font-size: 30px; font-weight: bold; opacity: 1; transition: none; border: none; background: transparent;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; font-size: 30px; font-weight: bold; opacity: 1; border: none; background: transparent;">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" style="background-color: black; color: white; padding-top: 0;">
-        <!-- Cambiar el h3 a un formato más destacado, negrita y mayúsculas -->
         <h3 id="hint-title" style="font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 20px;"></h3>
-        <!-- Texto de la pista con borde blanco -->
-        <div id="hint-container" style="border: 1px solid white; padding: 10px; border-radius: 5px; background: transparent;">
-          <p id="hint" style="text-align: center; margin-bottom: 20px;"></p>
+        <!-- Contenedor de la pista -->
+        <div id="hint-container" style="display: none; border: 1px solid white; padding: 10px; border-radius: 5px; background: transparent; text-align: center;">
+          <p id="hint" style="margin-bottom: 20px;"></p>
         </div>
-        <!-- Mensaje de error estilizado -->
-        <p id="error-message" style="text-align: center; display: none; padding: 10px; border: 1px solid white; color: white; background: transparent; border-radius: 5px;"></p>
+        <!-- Contenedor del mensaje de error -->
+        <p id="error-message" style="display: none; text-align: center; color: white; border: 1px solid white; padding: 10px; border-radius: 5px; background-color: transparent;"></p>
       </div>
       <div class="modal-footer" style="border-top: none;">
         <button type="button" class="btn btn-warning btn-block" style="background-color: #f39c12; border: none;" data-dismiss="modal">Cerrar</button>
