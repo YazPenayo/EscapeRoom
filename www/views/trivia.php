@@ -185,59 +185,51 @@ include_once "../assets/includes/header.php";
     $(document).ready(function () {
     const confirmHintModal = $('#confirmHintModal');
     const hintModal = $('#hintModal');
-    const hintText = $('#hint'); // Contenedor para la pista
-    const errorMessage = $('#error-message'); // Contenedor para el mensaje de error
-    const confirmYesButton = $('#confirm-yes'); // Botón de confirmación
+    const hintText = $('#hint');
+    const errorMessage = $('#error-message');
+    const confirmYesButton = $('#confirm-yes');
 
     let idQuestion = parseInt("<?php echo $_SESSION['id_question']; ?>");
     let idPlayer = parseInt("<?php echo $_SESSION['id_player']; ?>");
     let idRoom = parseInt("<?php echo $_SESSION['selected_room']; ?>");
 
-    // Abrir el modal de confirmación al hacer clic en el botón de ayuda
     $('#help-button').on('click', function () {
         console.log('Botón de ayuda clicado, abriendo modal de confirmación...');
         confirmHintModal.modal('show');
     });
-
-    // Acción cuando el usuario confirma que quiere usar la pista
     confirmYesButton.on('click', function () {
         console.log('Confirmación de uso de pista, enviando solicitud AJAX...');
         console.log('ID de la pregunta enviada:', idQuestion);
-
-        // Realiza una solicitud AJAX para obtener la pista y registrar su uso
         $.ajax({
-            url: '../controllers/hint-controller.php', // Archivo PHP para manejar la solicitud
+            url: '../controllers/hint-controller.php',
             type: 'POST',
-            data: { id_question: idQuestion, id_player: idPlayer, id_room: idRoom }, // Enviar datos necesarios
+            data: { id_question: idQuestion, id_player: idPlayer, id_room: idRoom },
             dataType: 'json',
             success: function (response) {
                 console.log('Respuesta del servidor recibida:', response);
 
                 if (response.success) {
-                    // Si la pista se obtiene correctamente
-                    $('#hint-title').text('TU PISTA'); // Establece el título en el h3
-                    hintText.text(response.hint); // Muestra la pista
-                    errorMessage.hide(); // Oculta el mensaje de error
+                    $('#hint-title').text('TU PISTA');
+                    hintText.text(response.hint); 
+                    errorMessage.hide(); 
+                    $('#hint-container').show(); 
                 } else {
-                    // Si ya se usó la pista o hay un error
-                    $('#hint-title').text('PISTA AGOTADA'); // Cambia el título a "PISTA AGOTADA"
-                    hintText.text(''); // Limpia cualquier pista previa
+                    $('#hint-title').text('PISTA AGOTADA');
+                    hintText.text(''); 
+                    $('#hint-container').hide();
                     errorMessage
-                        .text(response.error) // Muestra el mensaje de error
+                        .text(response.error)
                         .css({
-                            'color': 'white',
-                            'border': '1px solid white',
-                            'padding': '10px',
+                            display: 'block',
+                            color: 'white',
+                            border: '1px solid white',
+                            padding: '10px',
                             'border-radius': '5px',
                             'background-color': 'transparent',
                             'text-align': 'center',
-                        })
-                        .show();
+                        });
                 }
-
-                // Cierra el modal de confirmación
                 confirmHintModal.modal('hide');
-                // Muestra el modal de pista
                 hintModal.modal('show');
             },
             error: function (xhr, status, error) {
@@ -245,20 +237,20 @@ include_once "../assets/includes/header.php";
                 errorMessage
                     .text('Error al intentar obtener la pista.')
                     .css({
-                        'color': 'white',
-                        'border': '1px solid white',
-                        'padding': '10px',
+                        display: 'block',
+                        color: 'white',
+                        border: '1px solid white',
+                        padding: '10px',
                         'border-radius': '5px',
                         'background-color': 'transparent',
                         'text-align': 'center',
-                    })
-                    .show();
-                hintText.text(''); // Limpia la pista en caso de error
+                    });
+                hintText.text('');
+                $('#hint-container').hide();
+                hintModal.modal('show');
             },
         });
     });
-
-    // Cerrar el modal de pista al hacer clic en "Cerrar"
     $('#hintModal .btn-warning').on('click', function () {
         console.log('Modal de pista cerrado por el usuario.');
         hintModal.modal('hide');
