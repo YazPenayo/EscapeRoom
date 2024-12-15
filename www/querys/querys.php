@@ -192,3 +192,12 @@ define('SQL_UPDATE_PASSWORD', '
     WHERE 
         id_player = ? AND password = ?
 ');
+
+define('SQL_GET_GAME_HISTORY', '
+SELECT 
+    COUNT(CASE WHEN answer_correct = 1 THEN 1 END) AS correct_answers, 
+    COUNT(CASE WHEN answer_correct = 0 THEN 1 END) AS incorrect_answers 
+FROM players_answers 
+WHERE id_player = ?
+');
+
