@@ -25,6 +25,20 @@ if ($result->num_rows > 0) {
     echo "Datos del jugador no encontrados.";
     exit();
 }
+
+$stmt = $conn->prepare(SQL_GET_GAME_HISTORY);
+$stmt->bind_param("i", $id_player); // Vincula el parámetro ID del jugador
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Verifica si se encuentra el jugador
+if ($result->num_rows > 0) {
+    $player_history = $result->fetch_assoc();
+} else {
+    // Si no se encuentra el jugador, puedes manejar el error de alguna forma
+    echo "Historial no encontrado del juagdor";
+    exit();
+}
 include_once "../assets/includes/header.php";
 ?>
 <body class="sub_page">
@@ -46,13 +60,6 @@ include_once "../assets/includes/header.php";
               <?php if (isset($_SESSION['id_player'])): ?>
                 <li class="nav-item">
                   <a class="nav-link" href="./logout.php"> Cerrar Sesión</a>
-                </li>
-              <?php else: ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">Registrarse</a>
                 </li>
               <?php endif; ?>
             </ul>
@@ -193,7 +200,6 @@ include_once "../assets/includes/header.php";
   </div>
 </div>
 
-
 <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" style="background-color: black; color: white; border-radius: 10px; padding: 20px; border: 2px solid white;">
@@ -205,21 +211,18 @@ include_once "../assets/includes/header.php";
       </div>
       <div class="modal-body" style="background-color: black; color: white;">
         <h3 style="font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 20px;">Historial de juego</h3>
+        <br>
         <div class="row" style="margin-bottom: 10px;">
           <div class="col-6"><strong>Usuario:</strong></div>
           <div class="col-6" id="username"><?php echo htmlspecialchars($player_data['username']); ?></div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
-          <div class="col-6"><strong>Habitaciones Completas:</strong></div>
-          <div class="col-6" id="habitacionesColectadas">0</div>
-        </div>
-        <div class="row" style="margin-bottom: 10px;">
           <div class="col-6"><strong>Respuestas Correctas:</strong></div>
-          <div class="col-6" id="respuestasCorrectas">0</div>
+          <div class="col-6" id="respuestasCorrectas"><?php echo htmlspecialchars($player_history['correct_answers']); ?></div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
           <div class="col-6"><strong>Respuestas Incorrectas:</strong></div>
-          <div class="col-6" id="respuestasIncorrectas">0</div>
+          <div class="col-6" id="respuestasIncorrectas"><?php echo htmlspecialchars($player_history['incorrect_answers']); ?></div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
           <div class="col-6"><strong>Fecha de Registro:</strong></div>
@@ -229,7 +232,6 @@ include_once "../assets/includes/header.php";
     </div>
   </div>
 </div>
-
 
 <?php
     include_once "../assets/includes/footer.php";
@@ -290,6 +292,6 @@ include_once "../assets/includes/header.php";
     });
   }
 });
-
 </script>
+
 </body>
