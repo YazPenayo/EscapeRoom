@@ -9,20 +9,21 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     // Validar y obtener los datos del formulario
     $name_player = ucfirst(trim($_POST['name_player']));
     $lastname_player = ucfirst(trim($_POST['lastname_player']));
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
-    
+
     if (isset($_POST['password']) && !empty($_POST['password'])) {
         $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
     } else {
-        die("La contraseña es requerida.");
+        echo json_encode(['error' => "La contraseña es requerida."]);
+        exit(); // Detener ejecución y enviar el error como respuesta JSON
     }
 
-    $registration_date = date('Y-m-d H:i:s'); 
+    $registration_date = date('Y-m-d H:i:s');
 
     // Validación: Verificar si el username ya existe
     $stmt_username = $conn->prepare(SQL_COUNT_USERNAMES);
@@ -32,10 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_username->fetch();
     $stmt_username->close();
 
-    if ($username_count > 0) {
-        die("El username '$username' ya está en uso. Por favor, elige otro.");
-    }
-
     // Validación: Verificar si el email ya está registrado
     $stmt_email = $conn->prepare(SQL_COUNT_EMAILS);
     $stmt_email->bind_param("s", $email);
@@ -44,14 +41,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_email->fetch();
     $stmt_email->close();
 
-    if ($email_count > 0) {
-        die("El email '$email' ya fue registrado. Por favor, utiliza otro.");
+    // Comprobamos si hay errores de duplicación
+    if ($username_count > 0) {
+        echo json_encode(['error_username' => "Este username ya está en uso. Por favor, elige otro."]);
+        exit(); // Detener ejecución si el username ya está en uso
     }
 
+    if ($email_count > 0) {
+        echo json_encode(['error_email' => "Este email ya está registrado. Por favor, utiliza otro."]);
+        exit(); // Detener ejecución si el email ya está en uso
+    }
 
-    
+    // Si no hay errores, insertamos el nuevo jugador
     $stmt = $conn->prepare(SQL_INSERT_PLAYER);
-    
+
     if ($stmt === false) {
         die('Error en la preparación de la declaración: ' . htmlspecialchars($conn->error));
     }
@@ -142,7 +145,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p>¡Comienza tu aventura ahora!</p>
                                     <div class='footer'>
                                         <p>Atentamente, el equipo de <strong>EscapeRoom</strong></p>
-                                        
                                     </div>
                                 </div>
                             </body>
@@ -155,10 +157,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("El correo no se pudo enviar. Error: {$mail->ErrorInfo}"); 
         }
 
-        header("Location: ../index.php");
+        // Devolver una respuesta JSON de éxito
+        echo json_encode(['success' => true]);
         exit(); 
     } else {
-        die("Error al registrar el jugador: " . htmlspecialchars($stmt->error));
+        echo json_encode(['error' => 'Error al registrar el jugador.']);
+        exit();
     }
     $stmt->close();
 }
+?>

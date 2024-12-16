@@ -120,22 +120,23 @@ include_once "../assets/includes/header.php";
           <input type="hidden" name="id_player" value="<?php echo htmlspecialchars($player_data['id_player']); ?>">
           <div class="form-group">
             <label for="fname_player">Nombre</label>
-            <input type="text" class="form-control" id="name_player" name="name_player" value="<?php echo htmlspecialchars($player_data['name_player']); ?>" required>
+            <input type="text" class="form-control" id="name_player" name="name_player" value="<?php echo htmlspecialchars($player_data['name_player']); ?>" >
           </div>
           <div class="form-group">
             <label for="lastname_player">Apellido</label>
-            <input type="text" class="form-control" id="lastname_player" name="lastname_player" value="<?php echo htmlspecialchars($player_data['lastname_player']); ?>" required>
+            <input type="text" class="form-control" id="lastname_player" name="lastname_player" value="<?php echo htmlspecialchars($player_data['lastname_player']); ?>" >
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($player_data['username']); ?>" required>
+            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($player_data['username']); ?>" >
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($player_data['email']); ?>" required>
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($player_data['email']); ?>" >
           </div>
           <br>
           <button type="submit" class="btn btn-warning btn-block" style="background-color: #f39c12; border: none;">Guardar</button>
+          <br>
           <div id="response-message"></div>
           <p class="mt-3 text-center">¿Deseas modificar tu contraseña actual? <a href="#" style="color: #f39c12;" data-toggle="modal" data-target="#contraseñaModal" data-dismiss="modal">Contraseña</a></p>
         </form>
@@ -143,7 +144,6 @@ include_once "../assets/includes/header.php";
     </div>
   </div>
 </div>
-
 <!-- Modal de Cambiar Contraseña -->
 <div class="modal fade" id="contraseñaModal" tabindex="-1" aria-labelledby="contraseñaModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -159,8 +159,8 @@ include_once "../assets/includes/header.php";
           <h3 style="font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 20px;">CAMBIAR CONTRASEÑA</h3>
             <div class="form-group">
               <label for="password_last">Contraseña Actual</label>
-              <div class="input-group">
-                <input type="password" class="form-control" placeholder="Contraseña Actual" id="password_last" name="password_last" required>
+              <div class="input-group" style="position: relative;">
+                <input type="password" class="form-control" placeholder="Contraseña Actual" id="password_last" name="password_last">
                 <div class="input-group-append">
                   <span class="input-group-text" id="toggle-password-last">
                     <i class="fa fa-eye" aria-hidden="true"></i>
@@ -170,8 +170,8 @@ include_once "../assets/includes/header.php";
             </div>
             <div class="form-group">
               <label for="password_new">Contraseña Nueva</label>
-              <div class="input-group">
-                <input type="password" class="form-control" placeholder="Contraseña Nueva" id="password_new" name="password_new" required>
+              <div class="input-group" style="position: relative;">
+                <input type="password" class="form-control" placeholder="Contraseña Nueva" id="password_new" name="password_new">
                 <div class="input-group-append">
                   <span class="input-group-text" id="toggle-password-new">
                     <i class="fa fa-eye" aria-hidden="true"></i>
@@ -181,8 +181,8 @@ include_once "../assets/includes/header.php";
             </div>
             <div class="form-group">
               <label for="confirm-password">Confirmar Contraseña</label>
-              <div class="input-group">
-                <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="confirm-password" name="confirm-password" required>
+              <div class="input-group" style="position: relative;">
+                <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="confirm-password" name="confirm-password">
                 <div class="input-group-append">
                   <span class="input-group-text" id="toggle-confirm-password">
                     <i class="fa fa-eye" aria-hidden="true"></i>
@@ -192,13 +192,16 @@ include_once "../assets/includes/header.php";
             </div>
           <br>
           <button type="submit" class="btn btn-warning btn-block" style="background-color: #f39c12; border: none;">Guardar</button>
-          <div id="response-message"></div>
+          <br>
+          <div id="response-message" style="color: red; text-align: center;"></div>
           <p class="mt-3 text-center">¿Te gustaría actualizar algún otro dato?<a href="#" style="color: #f39c12;" data-toggle="modal" data-target="#dateModal" data-dismiss="modal"> Mis datos</a></p>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+
 
 <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -236,62 +239,4 @@ include_once "../assets/includes/header.php";
 <?php
     include_once "../assets/includes/footer.php";
 ?>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-  // Función para mostrar/ocultar la contraseña actual en el modal de cambiar contraseña
-  const togglePasswordLast = document.getElementById('toggle-password-last');
-  if (togglePasswordLast) {
-    togglePasswordLast.addEventListener('click', function() {
-      const passwordField = document.getElementById('password_last');
-      const icon = this.querySelector('i');
-      if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        passwordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  }
-
-  // Función para mostrar/ocultar la nueva contraseña en el modal de cambiar contraseña
-  const togglePasswordNew = document.getElementById('toggle-password-new');
-  if (togglePasswordNew) {
-    togglePasswordNew.addEventListener('click', function() {
-      const passwordField = document.getElementById('password_new');
-      const icon = this.querySelector('i');
-      if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        passwordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  }
-
-  // Función para mostrar/ocultar la confirmación de la contraseña en el modal de cambiar contraseña
-  const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
-  if (toggleConfirmPassword) {
-    toggleConfirmPassword.addEventListener('click', function() {
-      const confirmPasswordField = document.getElementById('confirm-password');
-      const icon = this.querySelector('i');
-      if (confirmPasswordField.type === 'password') {
-        confirmPasswordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        confirmPasswordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  }
-});
-</script>
-
 </body>

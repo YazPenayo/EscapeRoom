@@ -3,7 +3,6 @@ include('../models/dbConnection.php');
 include('../querys/querys.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
     $player_id = $_POST['id_player']; 
     $name_player = ucfirst(trim($_POST['name_player']));
     $lastname_player = ucfirst(trim($_POST['lastname_player']));
@@ -12,15 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $stmt = $conn->prepare(SQL_UPDATE_PLAYER);
     $stmt->bind_param("sssss", $name_player, $lastname_player, $username, $email, $player_id);
+    
     if ($stmt === false) {
-        die('Error en la preparación de la declaración: ' . htmlspecialchars($conn->error));
+        echo json_encode(['success' => false, 'message' => 'Error en la preparación de la declaración']);
+        exit();
     }
 
     if ($stmt->execute()) {
-        header("Location: ../views/settings.php");
-        exit();
+        echo json_encode(['success' => true]);  // Devuelve un éxito
     } else {
-        die("Error al actualizar el jugador: " . htmlspecialchars($stmt->error));
+        echo json_encode(['success' => false, 'message' => 'Error al actualizar el jugador']);
     }
     $stmt->close();
 }

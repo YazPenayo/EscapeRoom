@@ -65,6 +65,16 @@ include('./querys/querys.php');
       background-color: #f39c12;
       border: none;
     }
+    .is-invalid {
+      border-color: #dc3545; /* Bordes rojos para errores */
+    }
+    .invalid-feedback {
+      color: #dc3545; /* Mensajes en rojo */
+      font-size: 0.875em;
+    }
+    .is-valid {
+      border-color: #28a745; /* Bordes verdes para válidos */
+    }
   </style>
 </head>
 <body>
@@ -86,9 +96,9 @@ include('./querys/querys.php');
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">
-                Iniciar Sesión
-              </a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">
+              Iniciar Sesión
+            </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal">
@@ -151,8 +161,9 @@ include('./querys/querys.php');
         $('#registerModal').modal('show');
       });
     });
-</script>
-
-
+  </script>
+  <script src="assets/js/jquery.validate.min.js"></script>
+  <script src="assets/js/validations/login-validation.js"></script>
+  <script src="assets/js/validations/register-validation.js"></script>
 </body>
 </html>

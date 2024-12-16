@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $param2 = $input;
     } else {
         $sql = SQL_LOGIN_PLAYERS;
-        $param1 = $input;  
+        $param1 = $input;
         $param2 = $input;
     }
 
@@ -31,31 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['id_player'] = $user['id_player'];
                 $_SESSION['is_login'] = true;
-                
+
                 if (isset($_SESSION['selected_room'])) {
                     $room_id = $_SESSION['selected_room'];
                     unset($_SESSION['selected_room']);
-                    header("Location: ../views/trivia.php?id_room=$room_id");
+                    echo json_encode(['success' => true, 'redirect' => "../views/trivia.php?id_room=$room_id"]);
                     exit;
                 } else {
-                    header("Location: ../views/rooms.php");
+                    echo json_encode(['success' => true, 'redirect' => "../views/rooms.php"]);
                     exit;
                 }
-
                 
             } else {
-                $_SESSION['error'] = "Contraseña incorrecta.";
-                header("Location: ../index.php");  // Redirigimos de vuelta al login
+                echo json_encode(['success' => false, 'error' => 'Contraseña incorrecta.']);
                 exit;
             }
         } else {
-            $_SESSION['error'] = "Usuario no encontrado.";
-            header("Location: ../index.php");  // Redirigimos de vuelta al login
+            echo json_encode(['success' => false, 'error' => 'Usuario no encontrado.']);
             exit;
         }
     } else {
-        $_SESSION['error'] = "Error al preparar la consulta.";
-        header("Location: ../index.php");  // Redirigimos de vuelta al login
+        echo json_encode(['success' => false, 'error' => 'Error al preparar la consulta.']);
         exit;
     }
 }
+?>
+

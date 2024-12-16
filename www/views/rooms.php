@@ -193,5 +193,8 @@ if ($resultado && $resultado->num_rows > 0) {
   <script type="text/javascript" src="../assets/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="../assets/js/bootstrap.js"></script>
   <script type="text/javascript" src="../assets/js/custom.js"></script>
+  <script src="../assets/js/jquery.validate.min.js"></script>
+  <script src="../assets/js/validations/login-validation.js"></script>
+  <script src="../assets/js/validations/register-validation.js"></script>
 </body>
 </html>

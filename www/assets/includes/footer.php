@@ -1,6 +1,9 @@
 <script type="text/javascript" src="../assets/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="../assets/js/custom.js"></script>
+    <script src="../assets/js/jquery.validate.min.js"></script>
+    <script src="../assets/js/validations/mydates-validation.js"></script>
+    <script src="../assets/js/validations/password-validation.js"></script>
     <script>
         let timeLeft = 90;
         const timerElement = document.getElementById("timer");
