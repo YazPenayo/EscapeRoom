@@ -1,5 +1,4 @@
 <!-- MODAL DE LOGIN -->
-
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -10,16 +9,16 @@
         </button>
       </div>
       <div class="modal-body" style="background-color: black; color: white;">
-        <form action="../controllers/login-controller.php" method="POST">
+        <form id="loginForm" action="../controllers/login-controller.php" method="POST">
           <h3>Iniciar Sesión</h3>
           <div class="form-group">
             <label for="input">Username</label>
-            <input type="text" class="form-control" id="input" name="input" placeholder="Email o Username" required>
+            <input type="text" class="form-control" id="input" name="input" placeholder="Email o Username" />
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
             <div class="input-group">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" />
               <div class="input-group-append">
                 <span class="input-group-text" id="toggle-password">
                   <i class="fa fa-eye" aria-hidden="true"></i>
@@ -28,20 +27,18 @@
             </div>
           </div>
           <button type="submit" class="btn btn-warning btn-block">Iniciar Sesión</button>
+          <div id="error-message" class="mt-3 text-center" style="display: none;"></div>
         </form>
-        <p class="mt-3 text-center">¿No tienes cuenta? <a href="#" style="color: #f39c12;" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Regístrate</a></p>
+        <p class="mt-3 text-center">
+          ¿No tienes cuenta?
+          <a href="#" style="color: #f39c12;" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Regístrate</a>
+        </p>
       </div>
     </div>
   </div>
 </div>
-<?php if (isset($_SESSION['error'])): ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-    </div>
-  <?php endif; ?>
 
 <!-- MODAL DE REGISTRO -->
-
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -55,52 +52,44 @@
         <form id="register-player-form" method="POST" action="../controllers/register-controller.php">
           <h3>Registrarse</h3>
           <div class="form-group">
-            <label for="fname_player">Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre" id="fname_player" name="name_player" required>
+            <label for="name_player">Nombre</label>
+            <input type="text" class="form-control" placeholder="Nombre" id="name_player" name="name_player">
           </div>
           <div class="form-group">
             <label for="lastname_player">Apellido</label>
-            <input type="text" class="form-control" placeholder="Apellido" id="lastname_player" name="lastname_player" required>
+            <input type="text" class="form-control" placeholder="Apellido" id="lastname_player" name="lastname_player">
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" placeholder="Username" id="username" name="username" required>
+            <input type="text" class="form-control" placeholder="Username" id="username" name="username">
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
+            <input type="email" class="form-control" placeholder="Email" id="email" name="email">
           </div>
           <div class="form-group">
             <label for="password-register">Contraseña</label>
             <div class="input-group">
-              <input type="password" class="form-control" placeholder="Contraseña" id="password-register" name="password" required>
-              <div class="input-group-append">
-                <span class="input-group-text" id="toggle-password-register">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </span>
-              </div>
+              <input type="password" class="form-control" placeholder="Contraseña" id="password-register" name="password">
             </div>
           </div>
           <div class="form-group">
             <label for="confirm-password-register">Confirmar Contraseña</label>
             <div class="input-group">
-              <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="confirm-password-register" name="confirm-password" required>
-              <div class="input-group-append">
-                <span class="input-group-text" id="toggle-confirm-password-register">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </span>
-              </div>
+              <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="confirm-password-register" name="confirm-password">
             </div>
           </div>
           <button type="submit" class="btn btn-warning btn-block">Registrarte</button>
+          <br>
           <div id="response-message"></div>
-          <p class="mt-3 text-center">¿Ya tienes cuenta? <a href="#" style="color: #f39c12;" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Inicia sesión</a></p>
+          <p class="mt-3 text-center">¿Ya tienes cuenta? 
+            <a href="#" style="color: #f39c12;" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Inicia sesión</a>
+          </p>
         </form>
       </div>
     </div>
   </div>
 </div>
-
 <!-- MODAL DE CONFIRMACIÓN -->
 <div class="modal fade" id="confirmHintModal" tabindex="-1" aria-labelledby="confirmHintModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -122,7 +111,6 @@
     </div>
   </div>
 </div>
-
 <!-- MODAL DE PISTA -->
 <div class="modal fade" id="hintModal" tabindex="-1" aria-labelledby="hintModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -148,12 +136,7 @@
     </div>
   </div>
 </div>
-
-
-
-
 <!-- MODAL TIMER -->
-
 <div class="modal fade" id="timeUpModal" tabindex="-1" role="dialog" aria-labelledby="timeUpModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color: black; color: white; border-radius: 10px; padding: 20px; border: 2px solid white;">
@@ -172,57 +155,3 @@
         </div>
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const togglePasswordRegister = document.getElementById('toggle-password-register');
-  if (togglePasswordRegister) {
-    togglePasswordRegister.addEventListener('click', function() {
-      const passwordField = document.getElementById('password-register');
-      const icon = this.querySelector('i');
-      if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        passwordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  }
-  const toggleConfirmPasswordRegister = document.getElementById('toggle-confirm-password-register');
-  if (toggleConfirmPasswordRegister) {
-    toggleConfirmPasswordRegister.addEventListener('click', function() {
-      const confirmPasswordField = document.getElementById('confirm-password-register');
-      const icon = this.querySelector('i');
-      if (confirmPasswordField.type === 'password') {
-        confirmPasswordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        confirmPasswordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  }
-  const togglePasswordLogin = document.getElementById('toggle-password');
-  if (togglePasswordLogin) {
-    togglePasswordLogin.addEventListener('click', function() {
-      const passwordField = document.getElementById('password');
-      const icon = this.querySelector('i');
-      if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        passwordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    });
-  }
-});
-</script>
-
